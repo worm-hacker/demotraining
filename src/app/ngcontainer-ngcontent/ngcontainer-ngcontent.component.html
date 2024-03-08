@@ -1,0 +1,9 @@
+<ng-container *ngIf="showItem">
+    <div *ngFor="let item of itemList">
+        {{item%2== 0? 'Item =' + item: ' '}}
+    </div>
+</ng-container>
+
+<button (click)="hideShow()">Click me</button>
+
+
