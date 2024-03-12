@@ -4,14 +4,16 @@
 <form [formGroup]="loginForm" (ngSubmit)="submitForm()" autocomplete="off">
   <p>
     <mat-form-field>
-      <input type="text" matInput placeholder="Username" formcontrolname="Username">
+      <input type="text" matInput placeholder="Username" formControlName="username">
     </mat-form-field>
+    <span *ngIf="!loginForm.valid && submitted && !loginForm.value.username" style="display: block; color: red;">Username is required!</span>
   </p>
 
   <p>
     <mat-form-field>
-      <input type="password" matInput placeholder="Password" formcontrolname="password">
+      <input type="password" matInput placeholder="Password" formControlName="password">
     </mat-form-field>
+    <span *ngIf="!loginForm.valid && submitted && !loginForm.value.password" style="display: block; color: red;">Password is required!</span>
   </p>
 
   <!-- <p *ngIf="error" class="error">
