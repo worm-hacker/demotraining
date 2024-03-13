@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
+import { RegistrationServiceService } from './registration.service.service';
+import { HttpClientModule } from '@angular/common/http'; 
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatRadioModule,
-  ]
+    MatRadioModule,HttpClientModule
+  ],
+  providers:[RegistrationServiceService]
 })
 export class RegistrationModuleModule { }

@@ -4,35 +4,50 @@
 <form [formGroup]="registerForm" (ngSubmit)="submitForm()" autocomplete="off">
   <p>
     <mat-form-field>
-      <input type="text" matInput placeholder="Email" >
+      <input type="text" matInput placeholder="Email" formControlName="email">
     </mat-form-field>
+    <span *ngIf="!registerForm.valid && submitted && !registerForm.value.email" style="display: block; color: red;">Email is required!</span>
+
   </p>
+  <p>
+      <mat-form-field>
+        <input type="text" matInput placeholder="password" formControlName="password">
+      </mat-form-field>
+      <span *ngIf="!registerForm.valid && submitted && !registerForm.value.password" style="display: block; color: red;">Password is required!</span>
+  
+    </p>
+  
 
   <p>
     <mat-form-field>
-      <input type="text" matInput placeholder="Full Name" >
+      <input type="text" matInput placeholder="Full Name" formControlName="fullname">
     </mat-form-field>
+    <span *ngIf="!registerForm.valid && submitted && !registerForm.value.fullname" style="display: block; color: red;">Full Name is required!</span>
+
   </p>
+  <p>
+    <mat-radio-group name="gender" formControlName="gender">
+        <mat-radio-button value="Male" checked="true">Male</mat-radio-button>
+        <mat-radio-button value="Female">Female</mat-radio-button>
+        <mat-radio-button value="Others">Others</mat-radio-button>
+    </mat-radio-group>
+    <span *ngIf="!registerForm.valid && submitted && !registerForm.value.gender" style="display: block; color: red;">Gender is required!</span>
+  </p>
+ <!--
   <p>
     <mat-radio-group name="gender">
         <mat-radio-button value="Male" checked="true">Male</mat-radio-button>
         <mat-radio-button value="Female">Female</mat-radio-button>
         <mat-radio-button value="Others">Others</mat-radio-button>
-    </mat-radio-group>
+    </mat-radio-group> 
   </p>
-
+  -->
   <p>
-    <!-- <mat-radio-group name="gender"> -->
-        <mat-radio-button value="Male" checked="true">Male</mat-radio-button>
-        <mat-radio-button value="Female">Female</mat-radio-button>
-        <mat-radio-button value="Others">Others</mat-radio-button>
-    <!-- </mat-radio-group> -->
-  </p>
-  <p>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" >
         <mat-label>Address</mat-label>
-        <textarea matInput></textarea>
+        <textarea matInput formControlName="address"></textarea>
     </mat-form-field>
+    <span *ngIf="!registerForm.valid && submitted && !registerForm.value.address" style="display: block; color: red;">Address is required!</span>
   </p>
 
   <!-- <p *ngIf="error" class="error">
