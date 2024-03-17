@@ -6,13 +6,15 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import { HomeComponent } from './home/home.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { ApiListingComponent } from './api-listing/api-listing.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     HomeComponent,
-    UserListComponent
+    UserListComponent,
+    ApiListingComponent
   ],
   imports: [
     CommonModule,

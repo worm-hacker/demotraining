@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl,  Validators} from '@angular/forms';
 import { LoginService } from './login.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth-guard/auth-guard.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +10,7 @@ import { LoginService } from './login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  constructor(private loginService: LoginService){
+  constructor(private loginService: LoginService, private router: Router, private authService: AuthService){
 
   }
   submitted:boolean= false;
@@ -20,15 +22,15 @@ export class LoginComponent {
    submitForm(){
     this.submitted = true;
     if(this.loginForm.valid){
-      console.log(this.loginForm.value);
-      console.log(this.loginForm.value.username);
-      console.log(this.loginForm.value.password);
       let createJson = {
         "email":this.loginForm.value.username,
         "password": this.loginForm.value.password 
       }
       this.loginService.login(createJson).subscribe((result)=>{
-        console.log(result);
+        if('token' in result){
+          this.authService.login();
+          this.router.navigateByUrl('/dashboard');
+        }
       })
     }
     

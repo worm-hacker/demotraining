@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegistrationServiceService } from './registration.service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import { RegistrationServiceService } from './registration.service.service';
 })
 export class RegisterComponent {
   //constructor(){
-  constructor( private registerService: RegistrationServiceService){
+  constructor( private registerService: RegistrationServiceService, private router: Router){
 
   }
     submitted:boolean= false;
@@ -32,13 +33,6 @@ export class RegisterComponent {
   submitForm(){
     this.submitted = true;
     if(this.registerForm.valid){
-      console.log(this.registerForm.value);
-      console.log(this.registerForm.value.email);
-      console.log(this.registerForm.value.password);
-      console.log(this.registerForm.value.fullname);
-      console.log(this.registerForm.value.gender);
-      console.log(this.registerForm.value.address);
-
       let createJson = {
         "email":this.registerForm.value.email,
         "password":this.registerForm.value.email,
@@ -48,10 +42,12 @@ export class RegisterComponent {
       }
    
       this.registerService.register(createJson).subscribe((result)=>{
-        console.log(result);
+        if('token' in result){
+          this.router.navigateByUrl('/login');
+        }
       })
     
-      }
     }
+  }
 
 }

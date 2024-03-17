@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ApiListingComponent } from './api-listing/api-listing.component';
+import { HttpInterceptInterceptor } from './api-listing/http-intercept.interceptor';
+import { TemplateDrivenFormsComponent } from './template-driven-forms/template-driven-forms.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     NgcontainerNgcontentComponent,
     ServiceCompComponent,
     NotFoundComponent,
+    ApiListingComponent,
+    TemplateDrivenFormsComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,9 +56,16 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserAnimationsModule,
     MatIconModule,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptInterceptor,
+      multi: true
+    } 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
